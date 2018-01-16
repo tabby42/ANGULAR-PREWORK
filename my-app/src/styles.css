@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.jumbotron {
+     background: url('https://www.codefactory.wien/www/test/wp-content/uploads/2016/12/wall-dark.png') no-repeat center center;
+     color: white;
+}
