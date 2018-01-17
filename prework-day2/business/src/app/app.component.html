@@ -1,8 +1,52 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>
+<!--  -->
+
+<!-- <h1>
  Items iteration
 </h1>
 <ul *ngFor="let item of items | async">
  <li>{{item.title}}</li>
-</ul>
+</ul> -->
+
+<!-- <h1>
+ Items iteration
+</h1>
+<ul *ngFor="let business of businesses">
+ <li>{{business.company}}</li>
+</ul> -->
+
+<div class="container">
+ <h2>Business Contacs</h2>
+ <div *ngIf="appState == 'extend'">
+     <div class="row">
+       <div class="col-lg-6">
+         <button class="btn btn-info" (click)="changeState('default')">close</button>
+       </div>
+       <div class="col-lg-6">
+         <div *ngFor="let business of businesses">
+           <div *ngIf="business.$key == activeKey">
+             {{business.description}}
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Company</th>
+       <th>Category</th>
+       <th>Phone</th>
+     </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let business of businesses">
+         <td>{{business.company}}</td>
+         <td>{{business.category}}</td>
+         <td>{{business.phone}}</td>
+         <button (click)="changeState('extend', business.$key)" class="btn btn-info">More</button>
+       </tr>
+   </tbody>
+ </table>
+</div>
 
