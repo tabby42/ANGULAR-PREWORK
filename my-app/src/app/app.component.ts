@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-//import navbar
+//import navbar and hero section
 import {NavbarComponent} from './navbar/navbar.component';
 import {HeroComponent} from './hero/hero.component';
-
+//make jquery usable 
 declare var jquery:any;
 declare var $:any;
 
@@ -12,7 +12,7 @@ declare var $:any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title: string = 'My First Angular App';
+    title: string = 'My First Angular App';
     public ngOnInit()
 	  {
 	    $(document).ready(function(){

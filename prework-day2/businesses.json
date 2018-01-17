@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Retail",
+    "city": "Vienna",
+    "company": "Billa",
+    "description": "Retails - Groceries",
+    "email": "contact@billa.com",
+    "phone": "0043 5664 47 78",
+    "state": "Austria",
+    "street_address": "Hernalser strasse 89",
+    "years_in_business": 14,
+    "zipcode": 1170
+  },
+  {
+    "category": "Retail",
+    "city": "Vienna",
+    "company": "Hoffer",
+    "description": "Retails - Groceries",
+    "email": "contact@hoffer.com",
+    "phone": "0043 5365 67 11",
+    "state": "Austria",
+    "street_address": "Geblergasse 2",
+    "years_in_business": 16,
+    "zipcode": 1170
+  },
+  {
+    "category": "IT",
+    "city": "San Francisko",
+    "company": "Microsoft",
+    "description": "Technology - Enterprise B2B Solutions",
+    "email": "contact@microsoft.com",
+    "phone": "1 415-229-7500",
+    "state": "California",
+    "street_address": "845 Market St #257",
+    "years_in_business": 37,
+    "zipcode": "CA 94103"
+  },
+  {
+    "category": "IT",
+    "city": "San Francisko",
+    "company": "Apple",
+    "description": "Technology - Electronic devices",
+    "email": "contact@apple.com",
+    "phone": "1 415-486-4800",
+    "state": "California",
+    "street_address": "300 Post Street",
+    "years_in_business": 27,
+    "zipcode": "CA 94108"
+  },
+  {
+    "category": "IT",
+    "city": "Vienna",
+    "company": "Novomatic",
+    "description": "Technology - Gaming, gambling",
+    "email": "contact@novomatic.com",
+    "phone": "43 1 5324787",
+    "state": "Austria",
+    "street_address": "Friedrichstraße 7",
+    "years_in_business": 27,
+    "zipcode": 1100
+  }
+]
