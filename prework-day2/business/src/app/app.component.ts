@@ -12,12 +12,14 @@ declare var $:any;
 
 
 @Component({
+  //metadata for component
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [FirebaseService]
 })
 export class AppComponent implements OnInit{
+  //inside Typescript class -> no var or let keyword to declare class properties
   title = 'Business';
   
   //items: Observable<any[]>;
@@ -33,19 +35,42 @@ export class AppComponent implements OnInit{
   }
 
    ngOnInit() {
+   	   this.appState = 'default';
+
    	   this._firebaseService.getBusinesses().valueChanges().subscribe(businesses => {
 	     this.businesses = businesses;
 	   });
+
 	   this._firebaseService.getCategories().valueChanges().subscribe(categories => {
 	     this.categories = categories;
 	   });
    }
-   
+
+   filterCategory(category) {
+	   this._firebaseService.getBusinesses(category).valueChanges().subscribe(businesses => {
+	     this.businesses = businesses;
+	   })
+	 }
+
    //manage which parts of the HTML should be displayed depending on their state
    changeState(state, key = null) {
 	   if(key) {
 	     this.activeKey = key;
 	   }
 	   this.appState = state;
+	 }
+
+	 
+	addBusiness(company: string, category: string, phone: string, description: string) {
+		console.log('addBusiness ' +  company + ' ' + category + ' ' + phone + ' ' + description);
+		//window.stop();
+	   var newBusiness = {
+	     company: company,
+	     category: category,
+	     phone: phone,
+	     description: description
+	   }
+	   this._firebaseService.addBusiness(newBusiness);
+	   this.changeState('default');
 	 }
 }

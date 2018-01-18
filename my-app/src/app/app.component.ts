@@ -6,7 +6,10 @@ import {HeroComponent} from './hero/hero.component';
 declare var jquery:any;
 declare var $:any;
 
+
+//decorator plus class = Component
 @Component({
+  //metadata for component
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

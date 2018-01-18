@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser'; //needed for running Angular websites
 import { NgModule } from '@angular/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -22,7 +22,9 @@ const appRoutes: Routes = [
 	 },
 ];
 
+//root module AppModule -> needed to launch application
 @NgModule({
+  //list of all components inside this module
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -30,6 +32,7 @@ const appRoutes: Routes = [
     HomePageComponent,
     AboutPageComponent
   ],
+  //specify dependencies
   imports: [
     BrowserModule,
     BsDropdownModule.forRoot(),

@@ -17,13 +17,28 @@ export class FirebaseService {
      
    }
 
-   getBusinesses() {
-       this.businesses = this.af.list('/businesses') as AngularFireList<Business>;
+   // getBusinesses(category: string = null) {
+   //     this.businesses = this.af.list('/businesses') as AngularFireList<Business>;
+   //     return this.businesses;
+   // }
+
+   getBusinesses(category: string = null) {
+       if (category != null) {
+           this.businesses = this.af.list('/businesses', 
+           	ref => ref.orderByChild('category').equalTo(category)) as AngularFireList<Business>;
+       } else {
+           this.businesses = this.af.list('/businesses') as AngularFireList<Business>;
+       }
        return this.businesses;
    }
+
    getCategories() {
        this.categories = this.af.list('/categories') as AngularFireList<Category>;
        return this.categories ;
+   }
+
+   addBusiness(newBusiness) {
+       return this.businesses.push(newBusiness);
    }
 
 }

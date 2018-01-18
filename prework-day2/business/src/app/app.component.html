@@ -14,9 +14,20 @@
 <ul *ngFor="let business of businesses">
  <li>{{business.company}}</li>
 </ul> -->
-
 <div class="container">
  <h2>Business Contacs</h2>
+ <div *ngIf="appState == 'default'" class="row">
+     <div class="col-lg-12">
+       <label>Filter Category
+         <select (change)="filterCategory(filteredCategory.value)" #filteredCategory >
+           <option value="0">Select</option>
+           <option *ngFor="let category of categories" value="{{category.name}}">
+             {{category.name}}
+           </option>
+         </select>
+       </label>
+     </div>
+ </div> <!-- /category filter-->
  <div *ngIf="appState == 'extend'">
      <div class="row">
        <div class="col-lg-6">
@@ -28,9 +39,47 @@
              {{business.description}}
            </div>
          </div>
-       </div>
+       </div> <!-- /result of more button-->
      </div>
-   </div>
+  </div>
+  <div *ngIf="appState == 'default'" class="row">
+     <div class="col-lg-12">
+       <button class="btn btn-danger" (click)="changeState('add')">Add new business</button>
+     </div>
+ </div> <!-- /Add Business Button-->
+  <div *ngIf="appState == 'add'">
+     <div class="panel panel-primary">
+         <div class="panel-heading">Add new Business</div>
+         <div class="panel-body">
+             <form (submit)="addBusiness(company.value, category.value, phone.value, description.value)">
+                 <div class="row">
+                     <div class="col-lg-6">
+                         <div class="form-group">
+                             <label for="company">Company:</label>
+                             <input type="text" class="form-control" #company>
+                         </div>
+                         <label for="sel1">Select list (select one):</label>
+                         <select class="form-control" #category>
+                             <option class="form-control" value="0">Select</option>
+                             <option class="form-control" *ngFor="let category of categories" value="{{category.name}}">
+                                 {{category.name}}
+                             </option>
+                         </select>
+                         <div class="form-group">
+                             <label for="phone">Phone:</label>
+                             <input type="text" class="form-control" #phone>
+                         </div>
+                         <div class="form-group">
+                             <label for="description">Description:</label>
+                             <input type="text" class="form-control" #description>
+                         </div>
+                         <button type="submit" class="btn btn-danger">Submit</button>
+                     </div>
+                 </div>
+             </form>
+         </div>
+    </div>
+   </div><!-- /Add Business Form-->
  <table class="table table-striped">
    <thead>
      <tr>
@@ -49,4 +98,3 @@
    </tbody>
  </table>
 </div>
-
