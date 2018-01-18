@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseService } from './services/firebase.services';
 import { Business } from './services/firebase.services';
 import { Category } from './services/firebase.services';
+import { NgIf } from '@angular/common';
+import * as firebase from 'firebase/app';
 
 //make jquery usable 
 declare var jquery:any;
@@ -36,12 +40,19 @@ export class AppComponent implements OnInit{
 
    ngOnInit() {
    	   this.appState = 'default';
+   	   this._firebaseService.getBusinesses().snapshotChanges().map(actions => {
+	    return actions.map(action => ({ $key: action.key, ...action.payload.val() }));
+		  })
+	   	   .subscribe(businesses => {
+		     this.businesses = businesses;
+	   	     //console.log(this.businesses);
+	   	     console.log(businesses.map(business => business.$key));
+	   	     return businesses.map(business => business.$key);
+		   });
 
-   	   this._firebaseService.getBusinesses().valueChanges().subscribe(businesses => {
-	     this.businesses = businesses;
-	   });
-
-	   this._firebaseService.getCategories().valueChanges().subscribe(categories => {
+	   this._firebaseService.getCategories().snapshotChanges().map(actions => {
+	    return actions.map(action => ({ $key: action.key, ...action.payload.val() }));
+		  }).subscribe(categories => {
 	     this.categories = categories;
 	   });
    }
@@ -57,13 +68,17 @@ export class AppComponent implements OnInit{
 	   if(key) {
 	     this.activeKey = key;
 	   }
-	   this.appState = state;
+	   this.appState = state;	
+	   if (this.appState === "delete") {
+	   	 this.deleteBusiness();
+	   }
+	   // if (this.appState === "edit") {
+	   // 	  this.editBusiness();
+	   // }
 	 }
-
 	 
 	addBusiness(company: string, category: string, phone: string, description: string) {
-		console.log('addBusiness ' +  company + ' ' + category + ' ' + phone + ' ' + description);
-		//window.stop();
+	   console.log('addBusiness ' +  company + ' ' + category + ' ' + phone + ' ' + description);
 	   var newBusiness = {
 	     company: company,
 	     category: category,
@@ -73,4 +88,17 @@ export class AppComponent implements OnInit{
 	   this._firebaseService.addBusiness(newBusiness);
 	   this.changeState('default');
 	 }
+
+	 deleteBusiness() {
+	 	console.log(this.activeKey);
+	 	this._firebaseService.deleteBusiness(this.activeKey);
+	    this.changeState('default');
+	 }
+
+	 editBusiness() {
+	 	console.log(this.activeKey);
+	    this.changeState('default');
+	 }
 }
+
+

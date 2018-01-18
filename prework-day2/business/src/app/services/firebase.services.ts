@@ -28,6 +28,7 @@ export class FirebaseService {
            	ref => ref.orderByChild('category').equalTo(category)) as AngularFireList<Business>;
        } else {
            this.businesses = this.af.list('/businesses') as AngularFireList<Business>;
+           console.log('getBusinesses' + this.businesses);
        }
        return this.businesses;
    }
@@ -39,6 +40,10 @@ export class FirebaseService {
 
    addBusiness(newBusiness) {
        return this.businesses.push(newBusiness);
+   }
+
+   deleteBusiness(key) {
+   	   return this.businesses.remove(key);
    }
 
 }
@@ -57,6 +62,7 @@ export interface Business {
    email?: string;
    created_at: string;
 }
+
 export interface Category {
    $key?: string;
    name?: string;
